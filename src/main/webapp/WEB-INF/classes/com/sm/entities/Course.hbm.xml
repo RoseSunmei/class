@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.sm.entities">
+	<class name="Course" table="course">
+		<id name="couId">
+			<generator class="native" />
+		</id>
+		<property name="couNum" />
+		<property name="couName" />
+		<property name="couPro" />
+		<property name="couCre" />
+		<!-- // 一对多：一个Course又多个Score -->
+		<!-- private Set<Score> scores = new HashSet<Score>(); -->
+		<!-- <set name="scores"> -->
+		<!-- <key column="course_Id" /> -->
+		<!-- <one-to-many class="Score" /> -->
+		<!-- </set> -->
+	</class>
+</hibernate-mapping>	

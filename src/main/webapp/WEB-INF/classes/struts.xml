@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<!-- 关闭动态链接 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<!-- 开发者模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 统一处理表单的主题样式 -->
+	<!-- struts.ui.theme=xhtml默认值 -->
+	<constant name="struts.ui.theme" value="simple" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<interceptors>
+			<!-- 定义登录权限拦截器 -->
+			<interceptor name="authInterceptor"
+				class="com.sm.action.interceptor.AuthInterceptor">
+				<!-- 通过配置参数传递不需要拦截的Action给AuthInterceptor -->
+				<!-- AuthInterceptor获取配置参数使用类似于spring的set注入的方法 ：setExcludeActions(String) -->
+				<param name="excludeActions">LoginAction</param>
+			</interceptor>
+			<!-- 定义拦截器栈 -->
+			<interceptor-stack name="myStack">
+				<!-- 先引用登录权限拦截器 -->
+				<interceptor-ref name="authInterceptor" />
+				<!-- 再引入二次参数拦截器 -->
+				<interceptor-ref name="paramsPrepareParamsStack" />
+			</interceptor-stack>
+		</interceptors>
+		<!-- 修改默认的拦截器栈 -->
+		<default-interceptor-ref name="myStack" />
+
+		<!-- 全局返回视图 -->
+		<global-results>
+			<result name="login">/WEB-INF/views/login.jsp</result>
+			<result name="main" type="redirectAction">main</result>
+		</global-results>
+
+		<!-- 登录 -->
+		<action name="login_*" class="loginAction" method="{1}" />
+
+		<!-- 显示后台框架主页 -->
+		<action name="main_*" class="mainAction" method="{1}">
+			<result>/WEB-INF/views/main.jsp</result>
+			<result name="right">/WEB-INF/views/right.jsp</result>
+		</action>
+
+		<!-- 班级信息管理 -->
+		<action name="clas_*" class="clasAction" method="{1}">
+			<result>/WEB-INF/views/class/clas.jsp</result>
+			<result name="input">/WEB-INF/views/class/clas_input.jsp</result>
+ 			<result name="reload" type="redirectAction">
+				<param name="actionName">class</param>
+				<param name="baseQuery.currentPage">${baseQuery.currentPage}</param>
+				<param name="baseQuery.pageSize">${baseQuery.pageSize}</param>
+				<param name="baseQuery.clasNum">${baseQuery.clasNum}</param>
+				<param name="baseQuery.clasName">${baseQuery.clasName}</param>
+				<param name="clasId">${clasId}</param>
+			</result>
+		</action>
+
+		<!-- 学生信息管理 -->
+		<action name="student_*" class="studentAction" method="{1}">
+			<result>/WEB-INF/views/student/student.jsp</result>
+			<result name="input">/WEB-INF/views/student/student_input.jsp</result>
+			<result name="reload" type="redirectAction">
+				<param name="actionName">student</param>
+				<param name="baseQuery.currentPage">${baseQuery.currentPage}</param>
+				<param name="baseQuery.pageSize">${baseQuery.pageSize}</param>
+				<param name="baseQuery.stuNum">${baseQuery.stuNum}</param>
+				<param name="baseQuery.stuName">${baseQuery.stuName}</param>
+				<param name="baseQuery.stuAddress">${baseQuery.stuAddress}</param>
+				<param name="baseQuery.clasId">${baseQuery.clasId}</param>
+				<param name="stuId">${stuId}</param>
+			</result>
+		</action>
+
+		<!-- 课程信息管理 -->
+		<action name="course_*" class="courseAction" method="{1}">
+			<result>/WEB-INF/views/course/course.jsp</result>
+			<result name="input">/WEB-INF/views/course/course_input.jsp</result>
+			<result name="reload" type="redirectAction">
+				<param name="actionName">course</param>
+				<param name="baseQuery.currentPage">${baseQuery.currentPage}</param>
+				<param name="baseQuery.pageSize">${baseQuery.pageSize}</param>
+				<param name="baseQuery.couNum">${baseQuery.couNum}</param>
+				<param name="baseQuery.couName">${baseQuery.couName}</param>
+				<param name="couId">${couId}</param>
+			</result>
+		</action>
+
+		<!-- 成绩录入 -->
+		<action name="score_*" class="scoreAction" method="{1}">
+			<result>/WEB-INF/views/score/score.jsp</result>
+			<result name="input">/WEB-INF/views/score/score_input.jsp</result>
+			<result name="reload" type="redirectAction">score</result>
+		</action>
+
+		<!-- 课程分数统计 -->
+		<action name="coursescore_*" class="coursescoreAction" method="{1}">
+			<result>/WEB-INF/views/coursescore/coursescore.jsp</result>
+		</action>
+
+		<!-- 某一个学生的课程成绩信息 -->
+		<action name="stucourse_*" class="stucourseAction" method="{1}">
+			<result>/WEB-INF/views/stucourse/stucourse.jsp</result>
+			<result name="input">/WEB-INF/views/stucourse/stucourse_input.jsp
+			</result>
+		</action>
+		
+		<!-- 学生选课 -->
+		<action name="chocourse_*" class="chocourseAction" method="{1}">
+			<result>/WEB-INF/views/chocourse/chocourse.jsp</result>
+		</action>
+	</package>
+</struts>

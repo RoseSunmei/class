@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.sm.entities">
+	<class name="Student" table="student">
+		<id name="stuId">
+			<generator class="native" />
+		</id>
+		<property name="stuNum" />
+		<property name="stuName" />
+		<property name="stuSex" />
+		<property name="stuBirth" type="date" />
+		<property name="stuPwd" />
+		<property name="stuPhone" />
+		<property name="stuAddress" />
+		<!-- private Clas clas;//班级多对一 -->
+		<many-to-one name="clas" class="Clas" column="clas_Id"
+			not-null="true" />
+		<!-- private Set<Course> courses = new HashSet<Course>();// 课程多对多 -->
+		<set name="courses" table="score">
+			<key column="student_Id" />
+			<many-to-many class="Course" column="course_Id" />
+		</set>
+		<!-- // 一对多：一个Student又多个Score -->
+		<!-- private Set<Score> scores = new HashSet<Score>(); -->
+		<!-- <set name="scores"> -->
+		<!-- <key column="student_Id" /> -->
+		<!-- <one-to-many class="Score" /> -->
+		<!-- </set> -->
+	</class>
+</hibernate-mapping>	

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.sm.entities">
+	<class name="Score" table="score">
+		<id name="scoId">
+			<generator class="native" />
+		</id>
+		<property name="scoNum" />
+		<!-- private Student student;// 学生多对一 -->
+		<many-to-one name="student" column="student_Id" not-null="true" />
+		<!-- private Course course;// 课程多对一 -->
+		<many-to-one name="course" column="course_Id" not-null="true" />
+	</class>
+</hibernate-mapping>	

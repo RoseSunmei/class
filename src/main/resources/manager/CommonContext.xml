@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="baseDao" class="com.sm.dao.BaseDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="baseService" abstract="true">
+		<property name="baseDao" ref="baseDao" />
+	</bean>
+
+	<bean id="mainAction" class="com.sm.action.MainAction"
+		scope="prototype">
+	</bean>
+
+	<bean id="loginAction" class="com.sm.action.LoginAction"
+		scope="prototype">
+		<property name="studentService" ref="studentService" />
+	</bean>
+
+	<bean id="chocourseAction" class="com.sm.action.ChoCourseAction"
+		scope="prototype">
+		<property name="studentService" ref="studentService" />
+		<property name="courseService" ref="courseService" />
+		<property name="scoreService" ref="scoreService" />
+		<property name="clasService" ref="clasService" />
+	</bean>
+</beans>

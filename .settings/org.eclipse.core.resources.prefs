@@ -1,0 +1,16 @@
+#Wed May 17 10:49:41 CST 2017
+eclipse.preferences.version=1
+encoding//src/main/java/com/sm/action/BaseAction.java=UTF-8
+encoding//src/main/java/com/sm/action/CRUDAction.java=UTF-8
+encoding//src/main/java/com/sm/action/ClasAction.java=UTF-8
+encoding//src/main/java/com/sm/action/LoginAction.java=UTF-8
+encoding//src/main/java/com/sm/dao/BaseDao.java=UTF-8
+encoding//src/main/java/com/sm/entities/Score.java=UTF-8
+encoding//src/main/java/com/sm/entities/Student.java=UTF-8
+encoding//src/main/java/com/sm/query/BaseQuery.java=UTF-8
+encoding//src/main/java/com/sm/query/ClasQuery.java=UTF-8
+encoding//src/main/java/com/sm/query/CourseQuery.java=UTF-8
+encoding//src/main/java/com/sm/query/PageList.java=UTF-8
+encoding//src/main/java/com/sm/query/StudentQuery.java=UTF-8
+encoding//src/main/java/com/sm/service/impl/BaseServiceImpl.java=UTF-8
+encoding//src/main/resources/log4j.properties=UTF-8
